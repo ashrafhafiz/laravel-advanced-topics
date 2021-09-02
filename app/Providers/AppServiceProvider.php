@@ -6,9 +6,13 @@ use App\Billing\BankPaymentGateway;
 use App\Billing\CreditPaymentGateway;
 use App\Billing\PaymentGatewayContract;
 use App\Http\View\Composers\ChannelComposer;
+use App\Mixins\StrMixins;
 use App\Models\Channel;
+use Illuminate\Http\Response;
+use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -54,5 +58,19 @@ class AppServiceProvider extends ServiceProvider
 
         // Option 3
         View::composer(['channel.index', 'channel.post.create'], ChannelComposer::class);
+
+        // Macros
+        Str::macro('partNumber', function ($part){
+            return 'AB-' . substr($part, 0, 3) . '-' . substr($part, 3);
+        });
+
+        Str::mixin(new StrMixins(), false);
+
+        ResponseFactory::macro('errorJason', function($message = 'Default error message!'){
+            return [
+                'message' => $message,
+                'code' => 'Error code 123'
+            ];
+        });
     }
 }

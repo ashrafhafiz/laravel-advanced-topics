@@ -25,3 +25,15 @@ Route::get('pay', [PayOrderController::class, 'store']);
 Route::get('channels', [ChannelController::class, 'index']);
 
 Route::get('post/create', [PostChannelController::class, 'create']);
+
+Route::get('/macro', function () {
+    return \Illuminate\Support\Str::partNumber(123456789);
+});
+
+Route::get('/macro2', function () {
+    return Str::prefix('Ashraf Hafiz', 'Mr. ');
+});
+
+Route::get('/macro3', function () {
+    return Response::errorJason('Customized error message.');
+});
