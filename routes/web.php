@@ -39,3 +39,6 @@ Route::get('/macro3', function () {
 });
 
 Route::get('/pipeline', [\App\Http\Controllers\CastController::class, 'index']);
+
+Route::get('customers', '\App\Http\Controllers\CustomerController@index');
+Route::get('customers/show/{customerId}', '\App\Http\Controllers\CustomerController@show');
