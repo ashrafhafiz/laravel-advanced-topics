@@ -9,6 +9,7 @@ use App\Http\View\Composers\ChannelComposer;
 use App\Mixins\StrMixins;
 use App\Models\Channel;
 use Illuminate\Http\Response;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -46,6 +47,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Paginator::useBootstrap();
+
         // Option 1
         // attach data to all views
         // View::share('channels', Channel::orderBy('name')->get());

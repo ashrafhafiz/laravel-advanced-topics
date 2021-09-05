@@ -37,3 +37,5 @@ Route::get('/macro2', function () {
 Route::get('/macro3', function () {
     return Response::errorJason('Customized error message.');
 });
+
+Route::get('/pipeline', [\App\Http\Controllers\CastController::class, 'index']);
